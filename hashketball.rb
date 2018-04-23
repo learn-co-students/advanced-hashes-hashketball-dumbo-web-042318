@@ -207,12 +207,58 @@ def big_shoe_rebounds
   #binding.pry
 end
 
+def most_points_scored
+  home_players = game_hash[:home][:players]
+  away_players = 
+  players = home_players.merge(game_hash[:away][:players])
+  player_points = []
+  player_name = []
 
+  players.each do |name, stats|
+    player_points << stats[:points]
+    player_name << name
+    #binding.pry
+  end
 
+  puts player_name[player_points.rindex(player_points.max)]
+end
 
+most_points_scored
 
+def winning_team
+  home_score = 0
+  away_score = 0
 
+  game_hash.each do |location, team_attributes|
+    team_attributes.each do |k, v|
+      if k == :players
+        v.each do |name, stats|
+          if location == :home
+            home_score += stats[:points]
+          else
+            away_score += stats[:points]
+            #binding.pry
+          end
+        end
+      end
+    end
+  end
 
+  if home_score>away_score
+    puts game_hash[:home][:team_name]
+  elsif away_score>home_score
+    puts game_hash[:away][:team_name]
+  else 
+    puts "Overtime!"
+  end
+end
 
+winning_team
 
+def player_with_longest_name
 
+end
+
+def long_names_steal_a_ton?
+
+end
